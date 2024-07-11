@@ -1,24 +1,30 @@
 pipeline {
-    agent any
+  agent any
+  stages {
+    stage('install') {
+      steps {
+        script {
+          npm install
+        }
 
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building...'
-                // inserisci i tuoi comandi di build qui
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing...'
-                // inserisci i tuoi comandi di test qui
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying...'
-                // inserisci i tuoi comandi di deploy qui
-            }
-        }
+      }
     }
+
+    stage('build') {
+      steps {
+        echo 'build...'
+        script {
+          npm run build-dev
+        }
+
+      }
+    }
+
+    stage('Deploy') {
+      steps {
+        echo 'Deploying...'
+      }
+    }
+
+  }
 }
